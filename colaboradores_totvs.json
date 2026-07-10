@@ -1,0 +1,16 @@
+import json
+with open("colaboradores_totvs.json","r",encoding="utf-8") as f:
+    colaboradores_extraidos=json.load(f)
+for colab in colaboradores_extraidos:
+    nome=colab["name"];dep=colab["department"];score=colab["performance_score"];anos=colab["years_at_company"]
+    if score>=4.5:
+        mensagem_final=f"Parabéns, {nome}! O seu desempenho excelente ({score}) no time de {dep} é uma inspiração para a TOTVS!"
+    elif score>=3.5:
+        mensagem_final=f"Olá, {nome}! Obrigado pela dedicação em {dep}. O seu score de {score} mostra uma evolução sólida."
+    else:
+        mensagem_final=f"Olá, {nome}! Vamos agendar o seu PDI (Plano de Desenvolvimento) para apoiar o seu crescimento em {dep}."
+    if anos>=4:
+        mensagem_final+=" Obrigado pelos seus mais de 4 anos de jornada connosco!"
+    colab["news"].append({"tipo":"Feedback_Automatico","description":mensagem_final})
+with open("totvs_transformado.json","w",encoding="utf-8") as f:
+    json.dump(colaboradores_extraidos,f,indent=4,ensure_ascii=False)

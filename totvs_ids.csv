@@ -1,0 +1,13 @@
+import pandas as pd
+import json
+df=pd.read_csv("totvs_ids.csv")
+colaborador_ids=df["ColaboradorID"].tolist()
+def extrair_colaborador_por_id(id_procurado):
+    with open("colaboradores_totvs.json","r",encoding="utf-8") as f:
+        base=json.load(f)
+    for c in base:
+        if c["id"]==id_procurado:
+            return c
+    return None
+colaboradores_extraidos=[c for i in colaborador_ids if (c:=extrair_colaborador_por_id(i)) is not None]
+print(colaboradores_extraidos)

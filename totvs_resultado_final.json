@@ -1,0 +1,6 @@
+import json
+with open("totvs_transformado.json","r",encoding="utf-8") as f:
+    dados=json.load(f)
+with open("totvs_resultado_final.json","w",encoding="utf-8") as f:
+    json.dump(dados,f,indent=4,ensure_ascii=False)
+print("Pipeline concluído.")
